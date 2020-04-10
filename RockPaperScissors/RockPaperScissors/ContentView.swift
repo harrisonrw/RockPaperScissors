@@ -8,6 +8,50 @@
 
 import SwiftUI
 
+struct ComputerImageView: View {
+    var computerMove: String
+    
+    private let computerMoveImages = [
+        "Rock": "rock-large",
+        "Paper": "paper-large",
+        "Scissors": "scissors-large"
+    ]
+    
+    var body: some View {
+        Image(computerMoveImages[computerMove] ?? "no-move")
+            .renderingMode(.original)
+    }
+}
+
+typealias PlayerSelectedMoveAtIndex = (_ playerIndex: Int) -> ()
+
+struct PlayerInputView: View {
+    
+    var moves: [String]
+    var playerMove: String
+    var playerSelectedMoveAtIndex: PlayerSelectedMoveAtIndex
+    
+    private let moveImages = [
+        "Rock": "rock-small",
+        "Paper": "paper-small",
+        "Scissors": "scissors-small"
+    ]
+    
+    var body: some View {
+        HStack(spacing: 40) {
+            ForEach(0 ..< moves.count) { index in
+                Button(action: {
+                    self.playerSelectedMoveAtIndex(index)
+                }) {
+                    Image(self.moveImages[self.moves[index]]!)
+                        .foregroundColor(self.playerMove == self.moves[index] ? Color(red: 94.0/255.0, green: 53.0/255.0, blue: 177.0/255.0) : .black)
+                }
+            }
+        }
+    }
+    
+}
+
 struct ContentView: View {
     
     private var moves = ["Rock", "Paper", "Scissors"]
@@ -18,28 +62,25 @@ struct ContentView: View {
     @State private var score = 0
     
     var body: some View {
-        VStack {
+        VStack(spacing: 40) {
             Text("Rock-Paper-Scissors")
                 .font(.largeTitle)
                 .fontWeight(.black)
+                .foregroundColor(Color(red: 94.0/255.0, green: 53.0/255.0, blue: 177.0/255.0))
             
             Text("Score: \(score)")
             
-            Text("\(computerMove)")
+            Spacer()
+            
+            ComputerImageView(computerMove: self.computerMove)
+            
+            Spacer()
             
             Text("\(message)")
             
-            HStack {
-                ForEach(0 ..< moves.count) { index in
-                    Button(action: {
-                        self.playerSelectedMove(atIndex: index)
-                    }) {
-                        Text(self.moves[index])
-                    }
-                }
+            PlayerInputView(moves: self.moves, playerMove: self.playerMove) { index in
+                self.playerSelectedMove(atIndex: index)
             }
-            
-            Spacer()
             
         }
     }
