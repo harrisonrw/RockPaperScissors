@@ -2,7 +2,7 @@
 Rock Paper Scissors Game in SwiftUI
 
 <p align="center">
-  <img src="screenshot.jpg" alt="Screenshot"/>
+  <img src="screenshot-iphone11.jpg" alt="Screenshot"/>
 </p>
 
 ## QuickStart
