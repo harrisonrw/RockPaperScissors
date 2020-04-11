@@ -1,6 +1,10 @@
 # RockPaperScissors
 Rock Paper Scissors Game in SwiftUI
 
+<p align="center">
+  <img src="screenshot.jpg" alt="Screenshot"/>
+</p>
+
 ## QuickStart
 1. Clone this repository.
 ```
@@ -18,3 +22,8 @@ $ open RockPaperScissors.xcodeproj
 - Xcode 11.4
 - iOS 13.4+
 - Swift 5
+
+## Image Credits
+- Fist by Cristiano Zoucas from the Noun Project
+- wave by Cristiano Zoucas from the Noun Project
+- Scissors by Cristiano Zoucas from the Noun Project
