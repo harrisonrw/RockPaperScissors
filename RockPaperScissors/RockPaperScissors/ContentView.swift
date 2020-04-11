@@ -69,6 +69,7 @@ struct ContentView: View {
                 .foregroundColor(Color(red: 94.0/255.0, green: 53.0/255.0, blue: 177.0/255.0))
             
             Text("Score: \(score)")
+                .font(.system(size: 20.0, weight: .medium))
             
             Spacer()
             
@@ -77,11 +78,11 @@ struct ContentView: View {
             Spacer()
             
             Text("\(message)")
+                .font(.system(size: 20.0, weight: .medium))
             
             PlayerInputView(moves: self.moves, playerMove: self.playerMove) { index in
                 self.playerSelectedMove(atIndex: index)
             }
-            
         }
     }
     
@@ -92,21 +93,21 @@ struct ContentView: View {
         computerMove = moves[computerIndex]
         
         if (computerIndex + 1) % 3 == playerIndex {
-            message = "You Win!"
+            message = "\(playerMove) beats \(computerMove). You Win!"
             score += 10
         } else if computerIndex == playerIndex {
             message = "It's a Draw."
             score += 5
         } else {
-            message = "You Lose!"
+            message = "\(computerMove) beats \(playerMove). You Lose!"
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             self.message = "Get ready ..."
             self.computerMove = ""
             self.playerMove = ""
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.message = "Choose your move"
             }
         }
